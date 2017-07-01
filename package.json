@@ -1,0 +1,16 @@
+{
+  "name": "rpi-sense-hat-hue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "url": "https://teuteuguy@github.com/teuteuguy/rpi-sense-hat-hue",
+    "type": "git"
+  },
+  "author": "Tim <pub@lalatte.com>",
+  "license": "MIT",
+  "dependencies": {
+    "aws-iot-device-sdk": "^1.0.14",
+    "sense-hat-led": "^1.0.1"
+  }
+}
