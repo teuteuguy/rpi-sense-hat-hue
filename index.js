@@ -55,7 +55,7 @@ thingShadow.on('connect', function() {
     thingShadow.register(config.iotThingName, {
         persistentSubscribe: true
     }, function() {
-        setTimeout(refreshShadow, 0);
+        setTimeout(refreshShadow, 1000);
     });
 });
 
