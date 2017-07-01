@@ -1,6 +1,8 @@
 const awsIot = require('aws-iot-device-sdk');
 const sense = require("sense-hat-led");
 
+sense.clear();
+
 // Load config file
 const config = require('./config.json');
 
@@ -19,7 +21,7 @@ var configIoT = {
 };
 
 var thingState = {
-    
+    color: [0, 0, 0]
 };
 
 console.log('[SETUP] thingShadow state initialized with:');
@@ -76,4 +78,16 @@ thingShadow.on('status', function(thingName, stat, clientToken, stateObject) {
     console.log('[IOT EVENT] thingShadow.on(status): stat:', stat);
     console.log('[IOT EVENT] thingShadow.on(status): clientToken:', clientToken);
     console.log('[IOT EVENT] thingShadow.on(status): stateObject:', stateObject);
+});
+
+thingShadow.on('delta', function(thingName, stateObject) {
+
+    console.log('[EVENT] thingShadow.on(delta): ' + thingName + ': ' + JSON.stringify(stateObject));
+
+    if (stateObject.state.color !== undefined) thingState.color = stateObject.state.color;
+
+    console.log('[EVENT] thingShadow.on(delta): Updated thingState to:');
+    console.log(thingState);
+
+    setTimeout(refreshShadow, 0);
 });
