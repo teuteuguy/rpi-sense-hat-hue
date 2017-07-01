@@ -1,5 +1,5 @@
 [Unit]
-Description=Update IP in AWS IoT Shadow at boot
+Description=RPi sense hat Hue lamp
 After=network-online.target
 
 [Service]
@@ -7,9 +7,9 @@ Restart=on-failure
 RestartSec=10s
 Environment="NODE_PATH=/usr/local/bin/node"
 Environment="HOME=/home/pi"
-WorkingDirectory=/home/pi/update-ip-in-aws-iot-shadow
+WorkingDirectory=/home/pi/rpi-sense-hat-hue
 ExecStartPre=/bin/sleep 1
-ExecStart=/usr/local/bin/node /home/pi/update-ip-in-aws-iot-shadow/index.js
+ExecStart=/usr/local/bin/node /home/pi/rpi-sense-hat-hue/index.js
 
 [Install]
 WantedBy=multi-user.target
