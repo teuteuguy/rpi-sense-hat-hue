@@ -48,7 +48,7 @@ function refreshShadow() {
 
     thingShadow.update(config.iotThingName, toUpdate);
 
-    sense.clear(thingState.color.red, thingState.color.green, thingState.color.blue);
+    sense.clear(thingState.color.r, thingState.color.g, thingState.color.b);
 }
 
 
@@ -97,9 +97,9 @@ thingShadow.on('delta', function(thingName, stateObject) {
     console.log('[EVENT] thingShadow.on(delta): ' + thingName + ': ' + JSON.stringify(stateObject));
 
     if (stateObject.state.color !== undefined) {
-        thingState.color.r = stateObject.state.color.r;
-        thingState.color.g = stateObject.state.color.g;
-        thingState.color.b = stateObject.state.color.b;
+        if (stateObject.state.color.r !== undefined) thingState.color.r = stateObject.state.color.r;
+        if (stateObject.state.color.g !== undefined) thingState.color.g = stateObject.state.color.g;
+        if (stateObject.state.color.b !== undefined) thingState.color.b = stateObject.state.color.b;
     }
 
     console.log('[EVENT] thingShadow.on(delta): Updated thingState to:');
