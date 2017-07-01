@@ -1,7 +1,7 @@
 const awsIot = require('aws-iot-device-sdk');
 const sense = require("sense-hat-led");
 
-sense.clear();
+sense.clear([0, 255, 0]);
 
 // Load config file
 const config = require('./config.json');
@@ -46,7 +46,6 @@ function refreshShadow() {
     console.log('[EVENT] refreshShadow(): Refhreshing the Shadow:');
     console.log(toUpdate);
 
-
     thingShadow.update(config.iotThingName, toUpdate);
 
     sense.clear(thingState.color.red, thingState.color.green, thingState.color.blue);
@@ -59,7 +58,8 @@ thingShadow.on('connect', function() {
     thingShadow.register(config.iotThingName, {
         persistentSubscribe: true
     }, function() {
-        setTimeout(refreshShadow, 1000);
+        // setTimeout(refreshShadow, 1000);
+        refreshShadow();
     });
 });
 
@@ -105,5 +105,6 @@ thingShadow.on('delta', function(thingName, stateObject) {
     console.log('[EVENT] thingShadow.on(delta): Updated thingState to:');
     console.log(thingState);
 
-    setTimeout(refreshShadow, 0);
+    // setTimeout(refreshShadow, 0);
+    refreshShadow();
 });
