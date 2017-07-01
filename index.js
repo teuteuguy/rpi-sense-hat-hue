@@ -21,7 +21,11 @@ var configIoT = {
 };
 
 var thingState = {
-    color: [0, 0, 0]
+    color: {
+        red: 0, 
+        green: 0,
+        blue: 0
+    }
 };
 
 console.log('[SETUP] thingShadow state initialized with:');
@@ -45,7 +49,7 @@ function refreshShadow() {
 
     thingShadow.update(config.iotThingName, toUpdate);
 
-    sense.clear(thingState.color);
+    sense.clear(thingState.color.red, thingState.color.green, thingState.color.blue);
 }
 
 
