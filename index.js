@@ -56,7 +56,7 @@ thingShadow.on('connect', function() {
         persistentSubscribe: true
     }, function() {
         setTimeout(refreshShadow, 0);
-    });    
+    });
 });
 
 thingShadow.on('reconnect', function() {
@@ -80,6 +80,12 @@ thingShadow.on('status', function(thingName, stat, clientToken, stateObject) {
     console.log('[IOT EVENT] thingShadow.on(status): stat:', stat);
     console.log('[IOT EVENT] thingShadow.on(status): clientToken:', clientToken);
     console.log('[IOT EVENT] thingShadow.on(status): stateObject:', stateObject);
+});
+
+thingShadow.on('message', function(topic, payload) {
+
+    console.log('[EVENT] thingShadow.on(message): received on topic', topic, 'with message', payload.toString());
+
 });
 
 thingShadow.on('delta', function(thingName, stateObject) {
