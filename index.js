@@ -22,9 +22,9 @@ var configIoT = {
 
 var thingState = {
     color: {
-        red: 0, 
-        green: 0,
-        blue: 0
+        r: 0, 
+        g: 0,
+        b: 0
     }
 };
 
@@ -96,7 +96,11 @@ thingShadow.on('delta', function(thingName, stateObject) {
 
     console.log('[EVENT] thingShadow.on(delta): ' + thingName + ': ' + JSON.stringify(stateObject));
 
-    if (stateObject.state.color !== undefined) thingState.color = stateObject.state.color;
+    if (stateObject.state.color !== undefined) {
+        thingState.color.r = stateObject.state.color.r;
+        thingState.color.g = stateObject.state.color.g;
+        thingState.color.b = stateObject.state.color.b;
+    }
 
     console.log('[EVENT] thingShadow.on(delta): Updated thingState to:');
     console.log(thingState);
