@@ -43,7 +43,7 @@ function refreshShadow() {
     console.log(toUpdate);
 
 
-    // thingShadow.update(config.iotThingName, toUpdate);
+    thingShadow.update(config.iotThingName, toUpdate);
 
     sense.clear(thingState.color);
 }
