@@ -44,6 +44,8 @@ function refreshShadow() {
 
 
     thingShadow.update(config.iotThingName, toUpdate);
+
+    sense.clear(thingState.color);
 }
 
 
