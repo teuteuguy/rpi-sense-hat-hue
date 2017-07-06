@@ -22,7 +22,7 @@ var configIoT = {
 
 var thingState = {
     color: {
-        r: 0, 
+        r: 0,
         g: 0,
         b: 0
     }
@@ -35,6 +35,13 @@ console.log(configIoT);
 
 var thingShadow = awsIot.thingShadow(configIoT);
 
+var clientTokenUpdate;
+var refreshRequired = false;
+
+setInterval(function() {
+    console.log('Here');
+}, 0);
+
 function refreshShadow() {
 
     var toUpdate = {
@@ -43,12 +50,16 @@ function refreshShadow() {
         }
     };
 
-    console.log('[EVENT] refreshShadow(): Refhreshing the Shadow:');
-    console.log(toUpdate);
+    console.log('[EVENT] refreshShadow(): Update shadow:');
+    console.log(JSON.stringify(toUpdate, null, 2));
 
-    thingShadow.update(config.iotThingName, toUpdate);
+    clientTokenUpdate = thingShadow.update(config.iotThingName, toUpdate);
 
-    sense.clear(thingState.color.r, thingState.color.g, thingState.color.b);
+    if (clientTokenUpdate === null) {
+        console.log('[EVENT] refreshShadow(): update shadow failed, operation still in progress');
+    } else {
+        sense.clear(thingState.color.r, thingState.color.g, thingState.color.b);
+    }
 }
 
 
@@ -82,7 +93,8 @@ thingShadow.on('error', function(err) {
 thingShadow.on('status', function(thingName, stat, clientToken, stateObject) {
     console.log('[IOT EVENT] thingShadow.on(status): thingName:', thingName);
     console.log('[IOT EVENT] thingShadow.on(status): stat:', stat);
-    console.log('[IOT EVENT] thingShadow.on(status): clientToken:', clientToken);
+    console.log('[IOT EVENT] thingShadow.on(status): clientToken:      ', clientToken);
+    console.log('[IOT EVENT] thingShadow.on(status): clientTokenUpdate:', clientTokenUpdate);
     console.log('[IOT EVENT] thingShadow.on(status): stateObject:', stateObject);
 });
 
