@@ -103,7 +103,7 @@ thingShadow.on('delta', function(thingName, stateObject) {
     }
 
     console.log('[EVENT] thingShadow.on(delta): Updated thingState to:');
-    console.log(thingState);
+    console.log(JSON.stringify(thingState, null, 2));
 
     // setTimeout(refreshShadow, 0);
     refreshShadow();
